@@ -1,0 +1,24 @@
+<app-top-bar></app-top-bar>
+<div *ngIf="gameIsInProgress; else endOfTheGame">
+    <app-panel (endGame)="endGame($event)"></app-panel>
+</div>
+<ng-template #endOfTheGame>
+    <div *ngIf="endType === 'lose'; else win" class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col">
+                <h3 style="color: red">Você perdeu =(</h3>
+                <button class="btn btn-primary" style="margin-top: 50px" (click)="restartGame()">Jogar novamente</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #win>
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col">
+                <h3 style="color: green">Você ganhou =D</h3>
+                <button class="btn btn-primary" style="margin-top: 50px" (click)="restartGame()">Jogar novamente</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
