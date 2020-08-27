@@ -63,4 +63,31 @@ export class SalesService {
     return this.salesList;
   }
 
+  public getSalesWithPromesis(): Promise<Array<Sale>> {
+
+    return new Promise((resolve, reject) => {
+      let resolved = true
+      if(resolved){
+        setTimeout(() => resolve(this.salesList), 3000)
+      } else {
+        reject({errorCode: 404, errorMsg: 'Mensagem de erro de teste para simular rejeição em Promise'})
+      }
+    })
+    .then((sales: Sale[]) => {
+      console.log('Passando pelo primeiro then (resolvendo)')
+      return sales
+    })
+    .then((sales: Sale[]) => {
+      console.log('Passando pelo segundo then (resolvendo)')
+        return new Promise((resolve2, reject2) => {
+          setTimeout(() => {resolve2(sales)},3000)
+        })
+    })
+    .then((sales: Sale[]) => {
+      console.log('Passando pelo terceiro then (resolvendo), mas com 3 minutos de latência pois estava esperando a resolução de uma promise')
+      return sales
+    })
+
+  }
+
 }
