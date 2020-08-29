@@ -10,7 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { FunComponent } from './fun/fun.component';
-import { ROUTES } from './app.routes'
+import { ROUTES } from './app.routes';
+import { OfferComponent } from './offer/offer.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ROUTES } from './app.routes'
     HomeComponent,
     FooterComponent,
     RestaurantComponent,
-    FunComponent
+    FunComponent,
+    OfferComponent
   ],
   imports: [
     BrowserModule,

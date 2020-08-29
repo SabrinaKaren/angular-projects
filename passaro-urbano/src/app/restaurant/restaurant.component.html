@@ -25,7 +25,7 @@
           <p>R$ {{ sale.value }}</p>
         </div>
         <div class="row">
-          <button class="btn btn-outline-success">Ver oferta</button>
+          <button [routerLink]="['/oferta', sale.id]" class="btn btn-outline-success">Ver oferta</button>
         </div>
       </div>
     </div>
