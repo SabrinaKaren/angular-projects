@@ -10,7 +10,7 @@ export class SalesService {
   constructor(private http: HttpClient) { }
 
   getSales(): Promise<Array<Sale>> {
-    return this.http.get("http://localhost:3000/sales?featured=true")
+    return this.http.get("http://localhost:3000/sales")
         .toPromise()
         .then((response: any) => response);
   }
