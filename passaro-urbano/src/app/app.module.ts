@@ -11,7 +11,9 @@ import { FooterComponent } from './footer/footer.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { FunComponent } from './fun/fun.component';
 import { ROUTES } from './app.routes';
-import { OfferComponent } from './offer/offer.component'
+import { OfferComponent } from './offer/offer.component';
+import { HowUseComponent } from './offer/how-use/how-use.component';
+import { WhereIsComponent } from './offer/where-is/where-is.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { OfferComponent } from './offer/offer.component'
     FooterComponent,
     RestaurantComponent,
     FunComponent,
-    OfferComponent
+    OfferComponent,
+    HowUseComponent,
+    WhereIsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,48 +1,57 @@
 <div class="container">
-    <div class="oferta">
+
+    <div class="oferta" *ngIf="offer !== undefined">
   
         <div class="row">
         <div class="col">
-            <h4>Super Burger - Rodízio de Mini-hambúrger com opção de entrada.</h4>
+            <h4>{{ offer.description }}</h4>
         </div>
         </div>
 
         <div class="row">
-        <div class="col-md-6">
-            <div class="img_capa">
-            <img src="/assets/ofertas/1/img1.jpg" />
+            <div class="col-md-6">
+                <div class="img_capa">
+                    <img [src]="offer.images[0].url" />
+                </div>
+                <div class="thumbnails">
+                    <img *ngFor="let image of offer.images" [src]="image.url" />
+                </div>
             </div>
-
-            <div class="thumbnails">
-            <img src="/assets/ofertas/1/img2.jpg" />
-            <img src="/assets/ofertas/1/img3.jpg" />
-            <img src="/assets/ofertas/1/img4.jpg" />
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col text-center">
+                        <p>Por apenas</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>R$ {{ offer.value }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="row">
-            <div class="col text-center">
-                <p>Por apenas</p>
-            </div>
-            
-            </div>
-
-            <div class="row">
-            <div class="col text-center">
-                <h1>R$ 29,90</h1>
-            </div>
-            </div>
-
-            <div class="row">
-            <div class="col text-center">
-                <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
-            </div>
-            </div>
-            
-        </div>
-
         </div>
 
     </div>
+
+    <div class="row" style="margin-top: 25px; margin-bottom: 150px;">
+        <div class="col">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" routerLink="como-usar" data-toggle="tab" role="tab" aria-expanded="true">Como usar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="onde-fica" data-toggle="tab" role="tab">Onde fica?</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+
 </div>
