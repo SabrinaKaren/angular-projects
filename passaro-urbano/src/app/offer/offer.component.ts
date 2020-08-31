@@ -2,6 +2,8 @@ import { SalesService } from './../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sale } from '../models/sale.model';
+import { Observable } from 'rxjs';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-offer',
@@ -19,10 +21,20 @@ export class OfferComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.salesService.getSaleById(this.route.snapshot.params['id'])
         .then((sale: Sale) => {
           this.offer = sale;
         })
+    
+    // criando o observável
+    let time = interval(1000)
+
+    // criando o observador
+    time.subscribe((interval: number) => {
+      console.log(interval);
+    })
+
   }  
 
 }
