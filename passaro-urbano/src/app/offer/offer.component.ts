@@ -2,7 +2,7 @@ import { SalesService } from './../services/sales.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sale } from '../models/sale.model';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { interval } from 'rxjs';
 
 @Component({
@@ -27,13 +27,27 @@ export class OfferComponent implements OnInit {
           this.offer = sale;
         })
     
-    // criando o observável
-    let time = interval(1000)
-
-    // criando o observador
-    time.subscribe((interval: number) => {
-      console.log(interval);
+    // observável (observable)
+    let newObservable = Observable.create((observer: Observer<string>) => {
+      observer.next('Primeiro evento');
+      observer.next('Segundo evento');
+      observer.complete();
+      //observer.error('Ocorreu um erro, então a strem será encerrada');
+      observer.next('Terceiro evento');
     })
+
+    // observador (observer)
+    newObservable.subscribe(
+      (response: string) => {
+        console.log(response); // ação a ser tomada em cada evento de next
+      },
+      (error: string) =>{
+        console.log(error); // ação a ser tomada para evento de erro
+      },
+      () => {
+        console.log('Strem de eventos finalizada com sucesso'); // ação a ser tomada para evento de complete
+      }
+    )
 
   }  
 
