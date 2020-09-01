@@ -1,8 +1,8 @@
 import { SalesService } from './../services/sales.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sale } from '../models/sale.model';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 
 @Component({
@@ -11,8 +11,10 @@ import { interval } from 'rxjs';
   styleUrls: ['./offer.component.scss'],
   providers: [ SalesService ]
 })
-export class OfferComponent implements OnInit {
+export class OfferComponent implements OnInit, OnDestroy {
 
+  newObservable1Subscription: Subscription;
+  newObservable2Subscription: Subscription;
   offer: Sale;
 
   constructor(
@@ -27,8 +29,20 @@ export class OfferComponent implements OnInit {
           this.offer = sale;
         })
     
-    // observável (observable)
-    let newObservable = Observable.create((observer: Observer<string>) => {
+    // ------------------------------------------------------------
+
+    // observável 1 (observable)
+    let newObservable1 = interval(2000);
+
+    // observador 1 (observer)
+    this.newObservable1Subscription = newObservable1.subscribe((interval: number) => {
+      console.log(interval);
+    })
+
+    // ------------------------------------------------------------
+
+    // observável 2 (observable)
+    let newObservable2 = Observable.create((observer: Observer<string>) => {
       observer.next('Primeiro evento');
       observer.next('Segundo evento');
       observer.complete();
@@ -36,8 +50,8 @@ export class OfferComponent implements OnInit {
       observer.next('Terceiro evento');
     })
 
-    // observador (observer)
-    newObservable.subscribe(
+    // observador 2 (observer)
+    this.newObservable2Subscription = newObservable2.subscribe(
       (response: string) => {
         console.log(response); // ação a ser tomada em cada evento de next
       },
@@ -49,6 +63,13 @@ export class OfferComponent implements OnInit {
       }
     )
 
-  }  
+    // ------------------------------------------------------------
+
+  }
+
+  ngOnDestroy() {
+    this.newObservable1Subscription.unsubscribe();
+    this.newObservable2Subscription.unsubscribe();
+  }
 
 }
