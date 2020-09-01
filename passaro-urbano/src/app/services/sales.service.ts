@@ -1,6 +1,7 @@
+import { map, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Sale } from '../models/sale.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { API_SALES_URL, API_HOW_USE_URL, API_WHERE_IS_URL } from '../app.api';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class SalesService {
   getSales(): Promise<Array<Sale>> {
     return this.http.get(`${API_SALES_URL}?featured=true`)
         .toPromise()
-        .then((response: any) => { return response } );
+        .then((response: HttpResponse) => { return response } );
   }
 
   getSalesByCategory(category: string){
@@ -38,6 +39,11 @@ export class SalesService {
     return this.http.get(`${API_WHERE_IS_URL}?id=${id}`)
         .toPromise()
         .then((response: any) => { return response[0].description })
+  }
+
+  getSalesByTextToSearch(textToSearch: string) {
+    return this.http.get(`${API_SALES_URL}?description_like=${textToSearch}`)
+        .pipe( map((response: any) => { return response }), retry(10) );
   }
 
 }
