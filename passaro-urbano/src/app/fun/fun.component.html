@@ -22,7 +22,7 @@
           <p>Anunciado por: <b>{{ sale.advertiser }}</b></p>
         </div>
         <div class="row">
-          <p>R$ {{ sale.value }}</p>
+          <p>{{ sale.value | currency:'BRL' }}</p>
         </div>
         <div class="row">
           <button [routerLink]="['/oferta', sale.id]" class="btn btn-outline-success">Ver oferta</button>
