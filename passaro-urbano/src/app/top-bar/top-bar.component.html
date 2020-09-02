@@ -8,6 +8,9 @@
             </div>
             <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Pesquise por oferta..." #textToSearch (keyup)="search(textToSearch.value)"/>
+                <ul class="list-group" style="position: absolute;">
+                    <li class="list-group-item" *ngFor="let sale of sales">{{ sale.title }}</li>
+                </ul>
             </div>
             <div class="col-md-2">
                 <a a href="#"><img src="/assets/carrinho.png" /></a>
