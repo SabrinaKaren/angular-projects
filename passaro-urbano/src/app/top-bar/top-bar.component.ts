@@ -13,21 +13,19 @@ import { Sale } from '../models/sale.model';
 })
 export class TopBarComponent implements OnInit {
 
-  salesInObservable: Observable<Array<Sale>>;
+  sales: Observable<Array<Sale>>;
   searchSubject: Subject<string> = new Subject<string>();
-  sales: Array<Sale>;
 
   constructor(private salesService: SalesService) { }
 
   ngOnInit() {
 
-    this.salesInObservable = this.searchSubject
+    this.sales = this.searchSubject
         .pipe(
           debounceTime(1000),
           distinctUntilChanged(),
           switchMap((text) => {
-            console.log('Passando pelo Subject: ' + text);
-            if (text.trim() === ''){
+            if (text == undefined || text.trim() === ''){
               return of<Array<Sale>>([]);
             }
             return this.salesService.getSalesByTextToSearch(text);
@@ -37,16 +35,15 @@ export class TopBarComponent implements OnInit {
             return of<Array<Sale>>([]);
           })
         )
-    
-    this.salesInObservable.subscribe((sales: Array<Sale>) => {
-      this.sales = sales;
-    })
 
   }
 
   search(textToSearch: string) {
-    console.log('Keyup: ' + textToSearch);
     this.searchSubject.next(textToSearch);
+  }
+
+  cleanFieldOfSeacrh(){
+    this.searchSubject.next();
   }
 
 }

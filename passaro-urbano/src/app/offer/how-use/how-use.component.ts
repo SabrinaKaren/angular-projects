@@ -1,6 +1,6 @@
 import { SalesService } from './../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-how-use',
@@ -15,10 +15,14 @@ export class HowUseComponent implements OnInit {
   constructor(private route: ActivatedRoute, private salesService: SalesService) { }
 
   ngOnInit() {
-    this.salesService.getHowUseSaleById(this.route.parent.snapshot.params['id'])
-        .then((howUseDesc: string) => {
-          this.howUseDesc = howUseDesc;
-        })
+
+    this.route.parent.params.subscribe((params: Params) => {
+      this.salesService.getHowUseSaleById(params.id)
+          .then((howUseDesc: string) => {
+            this.howUseDesc = howUseDesc;
+          })
+    })
+    
   }
 
 }

@@ -1,6 +1,6 @@
 import { SalesService } from './../../services/sales.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-where-is',
@@ -15,10 +15,14 @@ export class WhereIsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private salesService: SalesService) { }
 
   ngOnInit() {
-    this.salesService.getWhereIsSaleById(this.route.parent.snapshot.params['id'])
-        .then((whereIs: string) => {
-          this.whereIs = whereIs;
-        })
+
+    this.route.parent.params.subscribe((params: Params) => {
+      this.salesService.getWhereIsSaleById(params.id)
+          .then((whereIs: string) => {
+            this.whereIs = whereIs;
+          })
+    })
+    
   }
 
 }

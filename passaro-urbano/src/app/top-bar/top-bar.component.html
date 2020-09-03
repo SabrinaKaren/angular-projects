@@ -8,8 +8,12 @@
             </div>
             <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Pesquise por oferta..." #textToSearch (keyup)="search(textToSearch.value)"/>
-                <ul class="list-group" style="position: absolute;">
-                    <li class="list-group-item" *ngFor="let sale of sales">{{ sale.title | shortDescription }}</li>
+                <ul class="list-group" style="position: absolute; z-index: 999;">
+                    <li class="list-group-item" *ngFor="let sale of sales | async">
+                        <a [routerLink]="['/oferta', sale.id]" (click)="cleanFieldOfSeacrh()">
+                            {{ sale.title | shortDescription:15 }}
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-2">

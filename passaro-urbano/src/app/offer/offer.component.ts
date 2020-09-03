@@ -1,6 +1,6 @@
 import { SalesService } from './../services/sales.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Sale } from '../models/sale.model';
 
 @Component({
@@ -13,17 +13,16 @@ export class OfferComponent implements OnInit, OnDestroy {
 
   offer: Sale;
 
-  constructor(
-    private route: ActivatedRoute,
-    private salesService: SalesService
-  ) { }
+  constructor(private route: ActivatedRoute, private salesService: SalesService) { }
 
   ngOnInit() {
 
-    this.salesService.getSaleById(this.route.snapshot.params['id'])
+    this.route.params.subscribe((params: Params) => {
+      this.salesService.getSaleById(params.id)
         .then((sale: Sale) => {
           this.offer = sale;
         })
+    })    
 
   }
 
