@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="ordem-compra">
+        
+        <form novalidate>
+      
+            <h5>Sua Compra</h5>
+            <hr/>
+    
+            <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+                <div class="form-group col-sm-1">
+                    <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
+                </div>
+                <div class="form-group col-sm-6">
+                    Super Burger
+                    <br />
+                    Rodízio de Mini-hambúrger com opção de entrada.
+                </div>
+        
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-link">-</button>
+                            1
+                            <button type="button" class="btn btn-link">+</button>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="form-group col-sm-3 d-flex justify-content-end">
+                    29.90
+                </div>
+            </div>
+            
+            <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+                <div class="form-group col-sm-1">
+                    <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
+                </div>
+                <div class="form-group col-sm-6">
+                    Estância das águas
+                    <br />
+                    Diversão garantida com piscinas, trilhas e muito mais.
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-link">-</button>
+                            1
+                            <button type="button" class="btn btn-link">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-3 d-flex justify-content-end">
+                    31.90
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col d-flex justify-content-end">
+                    <h4>Total do pedido: 61.80</h4>
+                </div>
+            </div>
+            <br/>
+    
+            <h5>Dados de entrega</h5>
+            <hr/>
+    
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control {{ addressIsPrimitive ? '' : (addressIsValid ? 'is-valid' : 'is-invalid') }}" placeholder="Endereço" autocomplete="off" minlength="5" required [value]="address" #inputAddress (input)="updateAddress(inputAddress.value)">
+                    <div *ngIf="addressIsPrimitive == false">
+                        <div *ngIf="addressIsValid; else msgAddressIsInvalid">
+                            <small class="form-text text-success">Ok</small>
+                        </div>
+                        <ng-template #msgAddressIsInvalid>
+                            <small class="form-text text-damger">Endereço inválido</small>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="text" class="form-control {{ addressNumberIsPrimitive ? '' : (addressNumberIsValid ? 'is-valid' : 'is-invalid') }}" placeholder="Número" autocomplete="off" minlength="1" required [value]="addressNumber" #inputAddressNumber (input)="updateAddressNumber(inputAddressNumber.value)">
+                    <div *ngIf="addressNumberIsPrimitive == false">
+                        <div *ngIf="addressNumberIsValid; else msgAddressNumberIsInvalid">
+                            <small class="form-text text-success">Ok</small>
+                        </div>
+                        <ng-template #msgAddressNumberIsInvalid>
+                            <small class="form-text text-damger">Número inválido</small>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control {{ addressComplementIsPrimitive ? '' : (addressComplementIsValid ? 'is-valid' : '') }}" placeholder="Complemento" autocomplete="off" [value]="addressComplement" #inputAddressComplement (input)="updateAddressComplement(inputAddressComplement.value)">
+                    <div *ngIf="addressComplementIsPrimitive == false">
+                        <div *ngIf="addressComplementIsValid">
+                            <small class="form-text text-success">Ok</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+    
+            <h5>Dados de pagamento</h5>
+            <hr/>
+    
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <select class="form-control {{ formOfPaymentIsPrimitive ? '' : (formOfPaymentIsValid ? 'is-valid' : 'is-invalid') }}" #selectFormOfPayment (change)="updateFormOfPayment(selectFormOfPayment.value)">
+                    <option value="">Selecione uma opção</option>
+                    <option value="cash" selected="{{ formOfPayment == 'cash' ? 'selected' : '' }}">Dinheiro</option>
+                    <option value="debit" selected="{{ formOfPayment == 'debit' ? 'selected' : '' }}">Débito</option>
+                    </select>
+                    <div *ngIf="formOfPaymentIsPrimitive == false">
+                        <div *ngIf="formOfPaymentIsValid; else msgFormOfPaymentIsInvalid">
+                            <small class="form-text text-success">Ok</small>
+                        </div>
+                        <ng-template #msgFormOfPaymentIsInvalid>
+                            <small class="form-text text-damger">Forma de pagamento inválida</small>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+    
+            <hr/>
+            <button type="submit" class="btn btn-primary btn-lg" disabled>Cofirmar compra</button>
+            
+        </form>
+      
+    </div>
+</div>

@@ -22,6 +22,7 @@ import { FunComponent } from './fun/fun.component';
 
 // pipes
 import { ShortDescription } from './utils/short-description.pipe';
+import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ShortDescription } from './utils/short-description.pipe';
     OfferComponent,
     HowUseComponent,
     WhereIsComponent,
-    ShortDescription
+    ShortDescription,
+    PurchaseOrderComponent
   ],
   imports: [
     BrowserModule,

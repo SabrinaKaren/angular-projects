@@ -1,3 +1,4 @@
+import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { WhereIsComponent } from './offer/where-is/where-is.component';
 import { HowUseComponent } from './offer/how-use/how-use.component';
 import { Routes } from '@angular/router';
@@ -17,4 +18,5 @@ export const ROUTES: Routes = [
         {path: 'como-usar', component: HowUseComponent },
         {path: 'onde-fica', component: WhereIsComponent }
     ]},
+    { path: 'ordem-compra', component: PurchaseOrderComponent }
 ]
