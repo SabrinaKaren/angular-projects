@@ -103,16 +103,16 @@
     
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <select class="form-control {{ formOfPaymentIsPrimitive ? '' : (formOfPaymentIsValid ? 'is-valid' : 'is-invalid') }}" #selectFormOfPayment (change)="updateFormOfPayment(selectFormOfPayment.value)">
+                    <select class="form-control {{ paymentTypeIsPrimitive ? '' : (paymentTypeIsValid ? 'is-valid' : 'is-invalid') }}" #selectpaymentType (change)="updatepaymentType(selectpaymentType.value)">
                     <option value="">Selecione uma opção</option>
-                    <option value="cash" selected="{{ formOfPayment == 'cash' ? 'selected' : '' }}">Dinheiro</option>
-                    <option value="debit" selected="{{ formOfPayment == 'debit' ? 'selected' : '' }}">Débito</option>
+                    <option value="cash" selected="{{ paymentType == 'cash' ? 'selected' : '' }}">Dinheiro</option>
+                    <option value="debit" selected="{{ paymentType == 'debit' ? 'selected' : '' }}">Débito</option>
                     </select>
-                    <div *ngIf="formOfPaymentIsPrimitive == false">
-                        <div *ngIf="formOfPaymentIsValid; else msgFormOfPaymentIsInvalid">
+                    <div *ngIf="paymentTypeIsPrimitive == false">
+                        <div *ngIf="paymentTypeIsValid; else msgpaymentTypeIsInvalid">
                             <small class="form-text text-success">Ok</small>
                         </div>
-                        <ng-template #msgFormOfPaymentIsInvalid>
+                        <ng-template #msgpaymentTypeIsInvalid>
                             <small class="form-text text-damger">Forma de pagamento inválida</small>
                         </ng-template>
                     </div>
@@ -120,7 +120,7 @@
             </div>
     
             <hr/>
-            <button type="submit" class="btn btn-primary btn-lg" disabled>Cofirmar compra</button>
+            <button type="button" class="btn btn-primary btn-lg" [disabled]="formStatus" (click)="makePurchase()">Cofirmar compra</button>
             
         </form>
       

@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchaseOrderService } from '../services/purchase-order.service';
+import { PurchaseOrder } from '../models/purchase-order.model';
 
 @Component({
   selector: 'app-purchase-order',
   templateUrl: './purchase-order.component.html',
-  styleUrls: ['./purchase-order.component.scss']
+  styleUrls: ['./purchase-order.component.scss'],
+  providers: [ PurchaseOrderService ]
 })
 export class PurchaseOrderComponent implements OnInit {
 
   address: string = '';
   addressNumber: string = '';
   addressComplement: string = '';
-  formOfPayment: string = '';
+  paymentType: string = '';
 
   addressIsValid: boolean;
   addressNumberIsValid: boolean;
   addressComplementIsValid: boolean;
-  formOfPaymentIsValid: boolean;
+  paymentTypeIsValid: boolean;
 
   addressIsPrimitive: boolean = true;
   addressNumberIsPrimitive: boolean = true;
   addressComplementIsPrimitive: boolean = true;
-  formOfPaymentIsPrimitive: boolean = true;
+  paymentTypeIsPrimitive: boolean = true;
 
-  constructor() { }
+  formStatus: string = 'disabled';
+  purchaseOrder: PurchaseOrder = new PurchaseOrder('', '', '', '');
+
+  constructor(private purchaseOrderService: PurchaseOrderService) { }
 
   ngOnInit() {
   }
@@ -35,6 +41,7 @@ export class PurchaseOrderComponent implements OnInit {
     } else {
       this.addressIsValid = false;
     }
+    this.analyzeForm();
   }
 
   updateAddressNumber(inputAddressNumber: string){
@@ -45,6 +52,7 @@ export class PurchaseOrderComponent implements OnInit {
     } else {
       this.addressNumberIsValid = false;
     }
+    this.analyzeForm();
   }
 
   updateAddressComplement(inputAddressComplement: string){
@@ -55,16 +63,35 @@ export class PurchaseOrderComponent implements OnInit {
     } else {
       this.addressComplementIsValid = false;
     }
+    this.analyzeForm();
   }
 
-  updateFormOfPayment(selectFormOfPayment: string){
-    this.formOfPayment = selectFormOfPayment;
-    this.formOfPaymentIsPrimitive = false;
-    if (selectFormOfPayment.length > 0){
-      this.formOfPaymentIsValid = true;
+  updatepaymentType(selectpaymentType: string){
+    this.paymentType = selectpaymentType;
+    this.paymentTypeIsPrimitive = false;
+    if (selectpaymentType.length > 0){
+      this.paymentTypeIsValid = true;
     } else {
-      this.formOfPaymentIsValid = false;
+      this.paymentTypeIsValid = false;
     }
+    this.analyzeForm();
+  }
+
+  analyzeForm(){
+    if (this.addressIsValid === true && this.addressNumberIsValid === true && this.paymentTypeIsValid === true){
+      this.formStatus = '';
+    } else {
+      this.formStatus = 'disabled';
+    }
+  }
+
+  makePurchase(){
+    this.purchaseOrder.address = this.address;
+    this.purchaseOrder.addressNumber = this.addressNumber;
+    this.purchaseOrder.addressComplement = this.addressComplement;
+    this.purchaseOrder.paymentType = this.paymentType;
+    this.purchaseOrderService.makePurchase(this.purchaseOrder)
+        .subscribe();
   }
 
 }
