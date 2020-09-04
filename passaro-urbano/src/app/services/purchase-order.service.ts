@@ -17,7 +17,7 @@ export class PurchaseOrderService {
       API_PURCHASE_ORDER_URL,
       purchaseOrder
     ).pipe(map((response: Response) => {
-      console.log(response)
+      return response;
     }))
 
   }

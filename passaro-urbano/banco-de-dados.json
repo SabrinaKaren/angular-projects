@@ -185,22 +185,5 @@
       "description": "Estrada Maria das Graças, 12, Salvador - BA "
     }
   ],
-  "purchase-order": [
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "address": "rua abc",
-      "addressNumber": "00",
-      "addressComplement": "casa",
-      "paymentType": "debit",
-      "id": 4
-    }
-  ]
+  "purchase-order": []
 }

@@ -27,6 +27,7 @@ export class PurchaseOrderComponent implements OnInit {
 
   formStatus: string = 'disabled';
   purchaseOrder: PurchaseOrder = new PurchaseOrder('', '', '', '');
+  purchaseOrderId: number;
 
   constructor(private purchaseOrderService: PurchaseOrderService) { }
 
@@ -86,12 +87,17 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   makePurchase(){
+
     this.purchaseOrder.address = this.address;
     this.purchaseOrder.addressNumber = this.addressNumber;
     this.purchaseOrder.addressComplement = this.addressComplement;
     this.purchaseOrder.paymentType = this.paymentType;
+
     this.purchaseOrderService.makePurchase(this.purchaseOrder)
-        .subscribe();
+        .subscribe((response: any) => {
+          this.purchaseOrderId = response.id;
+        });
+
   }
 
 }
