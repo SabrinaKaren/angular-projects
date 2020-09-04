@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="ordem-compra">
-        <form novalidate #form="ngForm" (ngSubmit)="makePurchase(form)">
+    <div class="ordem-compra" *ngIf="purchaseId === undefined">
+        <form novalidate #form="ngForm" (ngSubmit)="makePurchase()">
         
             <h5>Sua Compra</h5>
             <hr/>
@@ -57,10 +57,7 @@
                 </div>
             </div>
             <br/>
-    
-            <pre>Valid = {{ form.valid | json }}</pre>
-            <pre>Invalid = {{ form.invalid | json }}</pre>
-            <pre>{{ form.value | json }}</pre>
+            
             <h5>Dados de entrega</h5>
             <hr/>
     
@@ -136,5 +133,8 @@
             <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
 
         </form>
+    </div>
+    <div class="ordem-compra" *ngIf="purchaseId !== undefined">
+        <app-purchase-order-success [purchaseOrderId]="purchaseId"></app-purchase-order-success>
     </div>
 </div>

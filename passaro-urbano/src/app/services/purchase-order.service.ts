@@ -16,8 +16,8 @@ export class PurchaseOrderService {
     return this.http.post(
       API_PURCHASE_ORDER_URL,
       purchaseOrder
-    ).pipe(map((response: Response) => {
-      return response;
+    ).pipe(map((response: any) => {
+      return response.id;
     }))
 
   }
