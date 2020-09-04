@@ -5,6 +5,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ROUTES } from './app.routes';
+import { FormsModule } from '@angular/forms';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localePt);
@@ -44,6 +45,7 @@ import { PurchaseOrderSuccessComponent } from './purchase-order-success/purchase
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ {provide: LOCALE_ID, useValue: 'pt-Br'} ],
