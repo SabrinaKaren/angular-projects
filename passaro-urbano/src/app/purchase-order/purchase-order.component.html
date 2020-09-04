@@ -1,140 +1,119 @@
 <div class="container">
-    <div class="ordem-compra" *ngIf="purchaseId === undefined">
-        <form novalidate #form="ngForm" (ngSubmit)="makePurchase()">
-        
-            <h5>Sua Compra</h5>
-            <hr/>
-    
-            <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
-                <div class="form-group col-sm-1">
-                    <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
-                </div>
-                <div class="form-group col-sm-6">
-                    Super Burger
-                    <br/>
-                    Rodízio de Mini-hambúrger com opção de entrada.
-                </div>
-                <div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-link">-</button>
-                            1
-                            <button type="button" class="btn btn-link">+</button>
-                        </div>
+    <div class="ordem-compra">
+      <!--<form novalidate>-->
+      
+        <h5>Sua Compra</h5>
+        <hr/>
+  
+        <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+            <div class="form-group col-sm-1">
+                <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
+            </div>
+            <div class="form-group col-sm-6">
+                Super Burger
+                <br/>
+                Rodízio de Mini-hambúrger com opção de entrada.
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-link">-</button>
+                        1
+                        <button type="button" class="btn btn-link">+</button>
                     </div>
                 </div>
-                <div class="form-group col-sm-3 d-flex justify-content-end">
-                    29.90
-                </div>
             </div>
-            
-            <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
-                <div class="form-group col-sm-1">
-                    <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
-                </div>
-                <div class="form-group col-sm-6">
-                    Estância das águas
-                    <br/>
-                    Diversão garantida com piscinas, trilhas e muito mais.
-                </div>
-                <div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-link">-</button>
-                            1
-                            <button type="button" class="btn btn-link">+</button>
-                        </div>
+            <div class="form-group col-sm-3 d-flex justify-content-end">
+                29.90
+            </div>
+        </div>
+        
+        <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+            <div class="form-group col-sm-1">
+                <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
+            </div>
+            <div class="form-group col-sm-6">
+                Estância das águas
+                <br />
+                Diversão garantida com piscinas, trilhas e muito mais.
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-link">-</button>
+                        1
+                        <button type="button" class="btn btn-link">+</button>
                     </div>
                 </div>
-                <div class="form-group col-sm-3 d-flex justify-content-end">
-                    31.90
-                </div>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group col d-flex justify-content-end">
-                    <h4>Total do pedido: 61.80</h4>
-                </div>
+            <div class="form-group col-sm-3 d-flex justify-content-end">
+                31.90
             </div>
-            <br/>
-            
-            <h5>Dados de entrega</h5>
-            <hr/>
-    
-            <div class="form-row">
-    
-                <div class="form-group col-md-6">
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Endereço" 
-                    autocomplete="off"
-                    required
-                    minlength="3"
-                    maxlength="120"
-                    name="address"
-                    ngModel
-                    #inputAddress="ngModel">
-                    <small *ngIf="inputAddress.valid" class="form-text text-success">Ok</small>
-                    <small *ngIf="!inputAddress.valid && inputAddress.touched" class="form-text text-danger">Endereço inválido</small>
-                </div>
+        </div>
         
-                <div class="form-group col-md-2">
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Número" 
-                    autocomplete="off"
-                    required
-                    minlength="1"
-                    maxlength="10"
-                    name="addressNumber"
-                    ngModel
-                    #inputAddressNumber="ngModel">
-                    <small *ngIf="inputAddressNumber.valid" class="form-text text-success">Ok</small>
-                    <small *ngIf="!inputAddressNumber.valid && inputAddressNumber.touched" class="form-text text-danger">Número inválido</small>
-                </div>
-        
-                <div class="form-group col-md-4">
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Complemento" 
-                    autocomplete="off"
-                    name="addressComplement"
-                    ngModel>
-                </div>
-        
+        <div class="form-row">
+            <div class="form-group col d-flex justify-content-end">
+                <h4>Total do pedido: 61.80</h4>
             </div>
-            <br/>
-    
-            <h5>Dados de pagamento</h5>
-            <hr/>
-    
-            <div class="form-row"> 
-                <div class="form-group col-md-3">
-                    <select
-                    class="form-control"
-                    name="paymentType"
-                    required
-                    ngModel
-                    #inputPaymentType="ngModel"
-                    >
-                        <option value="">Selecione uma opção</option>
-                        <option value="cash">Dinheiro</option>
-                        <option value="debit">Débito</option>
-                    </select>
-                    <small *ngIf="inputPaymentType.valid" class="form-text text-success">Ok</small>
-                    <small *ngIf="!inputPaymentType.valid && inputPaymentType.touched" class="form-text text-danger">Forma de pagamento inválida</small>
-                </div>
+        </div>
+        <br/>
+  
+        <h5>Dados de entrega</h5>
+        <hr/>
+  
+        <div class="form-row">
+  
+            <div class="form-group col-md-6">
+                <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Endereço" 
+                autocomplete="off">
+                <small class="form-text text-success">Ok</small>
             </div>
     
-            <hr/>
-            <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
-
-        </form>
-    </div>
-    <div class="ordem-compra" *ngIf="purchaseId !== undefined">
-        <app-purchase-order-success [purchaseOrderId]="purchaseId"></app-purchase-order-success>
+            <div class="form-group col-md-2">
+                <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Número" 
+                autocomplete="off">
+                <small class="form-text text-success">Ok</small>
+            </div>
+    
+            <div class="form-group col-md-4">
+                <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Complemento" 
+                autocomplete="off">
+            </div>
+  
+        </div>
+        <br/>
+  
+        <h5>Dados de pagamento</h5>
+        <hr/>
+  
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <select 
+              class="form-control">
+                <option value="">Selecione uma opção</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="debito">Débito</option>
+            </select>
+            <small class="form-text text-success">Ok</small>
+          </div>
+        </div>
+  
+        <hr/>
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-lg">
+          Cofirmar compra
+        </button>
+        
+      <!--</form>-->
     </div>
 </div>

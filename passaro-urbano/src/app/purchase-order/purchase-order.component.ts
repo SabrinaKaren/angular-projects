@@ -11,28 +11,9 @@ import { NgForm } from '@angular/forms';
 })
 export class PurchaseOrderComponent implements OnInit {
 
-  @ViewChild('form', {static: false}) form: NgForm;
-  purchaseId: number;
-
   constructor(private purchaseOrderService: PurchaseOrderService) { }
 
   ngOnInit() {
-  }
-
-  makePurchase(){
-
-    let purchase: PurchaseOrder = new PurchaseOrder(
-      this.form.value.address,
-      this.form.value.addressNumber,
-      this.form.value.addressComplement,
-      this.form.value.paymentType
-    );
-
-    this.purchaseOrderService.makePurchase(purchase)
-        .subscribe((purchaseId: number) => {
-          this.purchaseId = purchaseId;
-        })
-
   }
 
 }
