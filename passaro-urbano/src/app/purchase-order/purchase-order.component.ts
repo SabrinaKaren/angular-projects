@@ -24,7 +24,12 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   makePurchase(){
-    console.log(this.formGroup);
+    if (this.formGroup.status === 'INVALID'){
+      this.formGroup.get('address').markAsTouched();
+      this.formGroup.get('addressNumber').markAsTouched();
+      this.formGroup.get('addressComplement').markAsTouched();
+      this.formGroup.get('paymentForm').markAsTouched();
+    }
   }
 
 }
