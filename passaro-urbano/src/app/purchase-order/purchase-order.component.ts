@@ -18,18 +18,36 @@ export class PurchaseOrderComponent implements OnInit {
     'paymentForm': new FormControl(null, [ Validators.required ])
   });
 
+  purchaseId: number;
+
   constructor(private purchaseOrderService: PurchaseOrderService) { }
 
   ngOnInit() {
   }
 
   makePurchase(){
+
     if (this.formGroup.status === 'INVALID'){
       this.formGroup.get('address').markAsTouched();
       this.formGroup.get('addressNumber').markAsTouched();
       this.formGroup.get('addressComplement').markAsTouched();
       this.formGroup.get('paymentForm').markAsTouched();
+    } else {
+
+      let purchase = new PurchaseOrder(
+        this.formGroup.value.address,
+        this.formGroup.value.addressNumber,
+        this.formGroup.value.addressComplement,
+        this.formGroup.value.paymentType
+      );
+
+      this.purchaseOrderService.makePurchase(purchase)
+          .subscribe((purchaseId: number) => {
+            this.purchaseId = purchaseId;
+          })
+
     }
+
   }
 
 }
