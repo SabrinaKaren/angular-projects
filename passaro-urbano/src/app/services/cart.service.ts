@@ -17,7 +17,16 @@ export class CartService {
   }
 
   addItem(offer: Sale){
-    this.items.push(this.commonMethods.saleModelToCartItemModel(offer));
+
+    let cartItemFound = this.items.find((item: CartItem) => item.id === offer.id );
+    //let cartItemFound = this.itens.find((item: CartItem) => item.id === itemCarrinho.id)
+
+    if (cartItemFound){
+      cartItemFound.amount++;
+    } else {
+      this.items.push(this.commonMethods.saleModelToCartItemModel(offer));
+    }
+
   }
   
 }

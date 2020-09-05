@@ -33,8 +33,6 @@ export class OfferComponent implements OnInit, OnDestroy {
 
   addItemInCart(){
     this.cartService.addItem(this.offer);
-    console.log('Itens a nivel de OFERTA: ');
-    console.log(this.cartService.showItems());
   }
 
   ngOnDestroy() {

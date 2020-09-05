@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PurchaseOrderService } from '../services/purchase-order.service';
 import { PurchaseOrder } from '../models/purchase-order.model';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CartItem } from '../models/cart-item';
 
 @Component({
   selector: 'app-purchase-order',
@@ -20,6 +21,7 @@ export class PurchaseOrderComponent implements OnInit {
   });
 
   purchaseId: number;
+  items: CartItem[] = [];
 
   constructor(
     private purchaseOrderService: PurchaseOrderService,
@@ -27,8 +29,7 @@ export class PurchaseOrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('Itens a nivel de ORDEM DE COMPRA: ');
-    console.log(this.cartService.showItems());
+    this.items = this.cartService.showItems();
   }
 
   makePurchase(){
