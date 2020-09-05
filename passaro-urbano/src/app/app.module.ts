@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localePt);
+import { CartService } from './services/cart.service';
 
 // components
 import { OfferComponent } from './offer/offer.component';
@@ -49,7 +50,7 @@ import { PurchaseOrderSuccessComponent } from './purchase-order-success/purchase
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ {provide: LOCALE_ID, useValue: 'pt-Br'} ],
+  providers: [ {provide: LOCALE_ID, useValue: 'pt-Br'}, CartService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

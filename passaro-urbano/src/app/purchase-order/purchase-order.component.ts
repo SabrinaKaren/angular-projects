@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PurchaseOrderService } from '../services/purchase-order.service';
 import { PurchaseOrder } from '../models/purchase-order.model';
@@ -20,9 +21,14 @@ export class PurchaseOrderComponent implements OnInit {
 
   purchaseId: number;
 
-  constructor(private purchaseOrderService: PurchaseOrderService) { }
+  constructor(
+    private purchaseOrderService: PurchaseOrderService,
+    private cartService: CartService
+  ) { }
 
   ngOnInit() {
+    console.log('Itens a nivel de ORDEM DE COMPRA: ');
+    console.log(this.cartService.showItems());
   }
 
   makePurchase(){

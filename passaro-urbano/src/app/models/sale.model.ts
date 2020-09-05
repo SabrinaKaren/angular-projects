@@ -1,5 +1,4 @@
 export class Sale {
-
     id: number;
     category: string;
     title: string;
@@ -8,5 +7,4 @@ export class Sale {
     value: number;
     featured: boolean;
     images: Array<object>;
-    
 }
