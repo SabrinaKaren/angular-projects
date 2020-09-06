@@ -2,7 +2,7 @@ import { CartService } from './../services/cart.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PurchaseOrderService } from '../services/purchase-order.service';
 import { PurchaseOrder } from '../models/purchase-order.model';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartItem } from '../models/cart-item';
 
 @Component({
@@ -55,6 +55,14 @@ export class PurchaseOrderComponent implements OnInit {
 
     }
 
+  }
+
+  incrementAmountOfItem(item: CartItem){
+    this.cartService.incrementAmountOfItem(item);
+  }
+
+  decrementAmountOfItem(item: CartItem){
+    this.cartService.decrementAmountOfItem(item);
   }
 
 }

@@ -19,7 +19,6 @@ export class CartService {
   addItem(offer: Sale){
 
     let cartItemFound = this.items.find((item: CartItem) => item.id === offer.id );
-    //let cartItemFound = this.itens.find((item: CartItem) => item.id === itemCarrinho.id)
 
     if (cartItemFound){
       cartItemFound.amount++;
@@ -27,6 +26,29 @@ export class CartService {
       this.items.push(this.commonMethods.saleModelToCartItemModel(offer));
     }
 
+  }
+
+  calculateTotalValue(){
+    let totalValue = 0;
+    this.items.map((item: CartItem) => {
+      totalValue += (item.value * item.amount);
+    })
+    return totalValue;
+  }
+
+  incrementAmountOfItem(itemOfCart: CartItem){
+    let cartItemFound = this.items.find((item: CartItem) => item.id === itemOfCart.id );
+    if (cartItemFound){
+      cartItemFound.amount++;
+    }
+  }
+
+  decrementAmountOfItem(itemOfCart: CartItem){
+    let cartItemFound = this.items.find((item: CartItem) => item.id === itemOfCart.id );
+    if (cartItemFound){
+      if (cartItemFound.amount > 1) cartItemFound.amount--;
+      else this.items.splice(this.items.indexOf(cartItemFound), 1);
+    }
   }
   
 }
