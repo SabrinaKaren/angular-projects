@@ -50,5 +50,9 @@ export class CartService {
       else this.items.splice(this.items.indexOf(cartItemFound), 1);
     }
   }
+
+  cleanCart(){
+    this.items = [];
+  }
   
 }

@@ -41,18 +41,25 @@ export class PurchaseOrderComponent implements OnInit {
       this.formGroup.get('paymentForm').markAsTouched();
     } else {
 
-      let purchase = new PurchaseOrder(
-        this.formGroup.value.address,
-        this.formGroup.value.addressNumber,
-        this.formGroup.value.addressComplement,
-        this.formGroup.value.paymentType
-      );
+      if (this.cartService.showItems().length <= 0){
+        alert('Seu carrinho está vazio!')
+      } else {
 
-      this.purchaseOrderService.makePurchase(purchase)
-          .subscribe((purchaseId: number) => {
-            this.purchaseId = purchaseId;
-          })
-
+        let purchase = new PurchaseOrder(
+          this.formGroup.value.address,
+          this.formGroup.value.addressNumber,
+          this.formGroup.value.addressComplement,
+          this.formGroup.value.paymentType,
+          this.cartService.showItems()
+        );
+  
+        this.purchaseOrderService.makePurchase(purchase)
+            .subscribe((purchaseId: number) => {
+              this.purchaseId = purchaseId;
+              this.cartService.cleanCart();
+            })
+  
+      }
     }
 
   }

@@ -187,22 +187,60 @@
   ],
   "purchase-order": [
     {
-      "address": "dsdas",
-      "addressNumber": "dsada",
-      "addressComplement": "dsadasd",
+      "address": "rua abc",
+      "addressNumber": "600",
+      "addressComplement": null,
+      "items": [
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "title": "Cozinha Mexicana",
+          "description": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "value": 32.9,
+          "amount": 1
+        },
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "title": "Estância das águas",
+          "description": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "value": 31.9,
+          "amount": 1
+        }
+      ],
       "id": 1
     },
     {
-      "address": "dsdas",
-      "addressNumber": "dsada",
-      "addressComplement": "dsadasd",
+      "address": "safds",
+      "addressNumber": "fdsfsd",
+      "addressComplement": null,
+      "items": [
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "title": "Estância das águas",
+          "description": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "value": 31.9,
+          "amount": 1
+        },
+        {
+          "id": 5,
+          "img": {
+            "url": "/assets/ofertas/5/img1.jpg"
+          },
+          "title": "Kart",
+          "description": "Bateria de Kart de 30 minutos.",
+          "value": 54.9,
+          "amount": 1
+        }
+      ],
       "id": 2
-    },
-    {
-      "address": "fsdf",
-      "addressNumber": "ff",
-      "addressComplement": "fdssdf",
-      "id": 3
     }
   ]
 }
