@@ -1,30 +1,34 @@
 <div class="card" style="width: 20rem;">
     <div class="card-body">
         <div class="card-title"></div>
-        <form>
+        <form [formGroup]="form" (ngSubmit)="registerUser()">
             <div class="form-group">
                 <input 
                     type="email" 
                     class="form-control" 
-                    placeholder="E-mail">
+                    placeholder="E-mail"
+                    formControlName="email">
             </div>
             <div class="form-group">
                 <input 
                     type="text"
                     class="form-control" 
-                    placeholder="Nome completo">
+                    placeholder="Nome completo"
+                    formControlName="name">
             </div>
             <div class="form-group">
                 <input 
                     type="text"
                     class="form-control" 
-                    placeholder="Nome de usuário">
+                    placeholder="Nome de usuário"
+                    formControlName="userName">
             </div>
             <div class="form-group">
                 <input 
                     type="password"
                     class="form-control" 
-                    placeholder="Senha">
+                    placeholder="Senha"
+                    formControlName="password">
             </div>
             <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
         </form>
