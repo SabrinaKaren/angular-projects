@@ -10,13 +10,19 @@ export class AuthService {
   constructor() { }
 
   registerUser(user: User){
+
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
         .then((response: any) => {
-          console.log(response);
+
+          delete user.password;
+          firebase.database().ref(`user_detail/${btoa(user.email)}`)
+              .set(user);
+
         })
         .catch((error: Error) => {
           console.log(error);
         })
+
   }
 
 }
