@@ -4,31 +4,35 @@
         <form [formGroup]="form" (ngSubmit)="registerUser()">
             <div class="form-group">
                 <input 
-                    type="email" 
-                    class="form-control" 
-                    placeholder="E-mail"
-                    formControlName="email">
+                type="email" 
+                class="form-control" 
+                placeholder="E-mail"
+                formControlName="email">
+                <small *ngIf="!form.get('email').valid && form.get('email').touched" class="form-text text-danger">E-mail inválido</small>
             </div>
             <div class="form-group">
                 <input 
-                    type="text"
-                    class="form-control" 
-                    placeholder="Nome completo"
-                    formControlName="name">
+                type="text"
+                class="form-control" 
+                placeholder="Nome completo"
+                formControlName="name">
+                <small *ngIf="!form.get('name').valid && form.get('name').touched" class="form-text text-danger">Nome inválido</small>
             </div>
             <div class="form-group">
                 <input 
-                    type="text"
-                    class="form-control" 
-                    placeholder="Nome de usuário"
-                    formControlName="userName">
+                type="text"
+                class="form-control" 
+                placeholder="Nome de usuário"
+                formControlName="userName">
+                <small *ngIf="!form.get('userName').valid && form.get('userName').touched" class="form-text text-danger">Nome para usuário inválido</small>
             </div>
             <div class="form-group">
                 <input 
-                    type="password"
-                    class="form-control" 
-                    placeholder="Senha"
-                    formControlName="password">
+                type="password"
+                class="form-control" 
+                placeholder="Senha"
+                formControlName="password">
+                <small *ngIf="!form.get('password').valid && form.get('password').touched" class="form-text text-danger">A senha precisa ter no mínimo 6 dígitos</small>
             </div>
             <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
         </form>
