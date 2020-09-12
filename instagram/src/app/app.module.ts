@@ -1,3 +1,4 @@
+import { DatabaseService } from './services/database.service';
 import { ROUTES } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NotifierModule } from 'angular-notifier';
+import { AddPublicationComponent } from './home/add-publication/add-publication.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { NotifierModule } from 'angular-notifier';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    PublicationsComponent
+    PublicationsComponent,
+    AddPublicationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { NotifierModule } from 'angular-notifier';
       behaviour: { autoHide: 5000 }
     })
   ],
-  providers: [ AuthService, AuthGuardService ],
+  providers: [ AuthService, AuthGuardService, DatabaseService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,32 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="form" (ngSubmit)="publish()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nova publicação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input
+                    type="file"
+                    class="form-control"
+                    style="padding-bottom: 35px; position: relative"
+                    accept="image/*"
+                    (change)="prepareImageUpload($event)">
+                    <br>
+                    <input
+                    type="text"
+                    placeholder="Título da publicação"
+                    class="form-control"
+                    formControlName="title">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
