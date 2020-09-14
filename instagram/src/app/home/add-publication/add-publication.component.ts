@@ -1,7 +1,10 @@
+import { ProgressService } from './../../services/progress.service';
 import { DatabaseService } from './../../services/database.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Observable, interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-publication',
@@ -15,8 +18,13 @@ export class AddPublicationComponent implements OnInit {
   });
   userEmail = '';
   image: any;
+  publicationProgress: string = 'pendente';
+  uploadPercentage: number;
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(
+    private databaseService: DatabaseService,
+    private progressService: ProgressService
+  ) { }
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -25,11 +33,27 @@ export class AddPublicationComponent implements OnInit {
   }
 
   publish(){
+
     this.databaseService.publish({
       'email': this.userEmail,
       'title': this.form.value.title,
       'image': this.image
     });
+
+    let uploadTracking = interval(1500);
+    let continueSubject = new Subject();
+    continueSubject.next(true);
+
+    uploadTracking.pipe(
+      takeUntil(continueSubject)
+    ).subscribe(() => {
+      console.log(this.progressService.status);
+      console.log(this.progressService.state);
+      if (this.progressService.status === 'concluido'){
+        continueSubject.next(false);
+      }
+    })
+
   }
 
   prepareImageUpload(event: Event){
