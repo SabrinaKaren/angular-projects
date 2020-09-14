@@ -40,18 +40,25 @@ export class AddPublicationComponent implements OnInit {
       'image': this.image
     });
 
-    let uploadTracking = interval(1500);
+    let uploadTracking = interval(1000);
     let continueSubject = new Subject();
     continueSubject.next(true);
 
     uploadTracking.pipe(
       takeUntil(continueSubject)
     ).subscribe(() => {
+
       console.log(this.progressService.status);
       console.log(this.progressService.state);
+      
+      this.publicationProgress = 'andamento';
+      this.uploadPercentage = Math.round((this.progressService.state.bytesTransferred / this.progressService.state.totalBytes)*100);
+
       if (this.progressService.status === 'concluido'){
+        this.publicationProgress = 'concluido';
         continueSubject.next(false);
       }
+
     })
 
   }

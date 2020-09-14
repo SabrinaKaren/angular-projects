@@ -11,29 +11,32 @@ export class DatabaseService {
 
   publish(publication: any){
 
-    let imageName = Date.now();
-
     firebase
-        .storage()
-        .ref(`images/${imageName}`)
-        .put(publication.image)
-        .on(firebase.storage.TaskEvent.STATE_CHANGED,
-          (snapshot: any) => {
-            this.progressService.status = "andamento"
-            this.progressService.state = snapshot
-          },
-          (error) => {
-            this.progressService.status = "erro"
-          },
-          ()=>{
-            this.progressService.status = "concluido"
-          }
-        );
+        .database()
+        .ref(`publications/${btoa(publication.email)}`)
+        .push({ title: publication.title })
+        .then((response: any) => {
 
-    // firebase
-    //     .database()
-    //     .ref(`publications/${btoa(publication.email)}`)
-    //     .push({ title: publication.title });
+            let imageName = response.key;
+            firebase
+                .storage()
+                .ref()
+                .child(`images/${imageName}`)
+                .put(publication.image)
+                .on(firebase.storage.TaskEvent.STATE_CHANGED,
+                  (snapshot: any) => {
+                    this.progressService.status = "andamento";
+                    this.progressService.state = snapshot;
+                  },
+                  (error) => {
+                    this.progressService.status = "erro";
+                  },
+                  () => {
+                    this.progressService.status = "concluido";
+                  }
+                )
+
+        })
 
   }
 
