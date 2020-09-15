@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 export class PublicationsComponent implements OnInit {
 
   userEmail = '';
+  publications;
 
   constructor(private databaseService: DatabaseService) { }
 
@@ -21,7 +22,12 @@ export class PublicationsComponent implements OnInit {
   }
 
   updateTimeLine(){
-    this.databaseService.getPublications(this.userEmail);
+
+    this.databaseService.getPublications(this.userEmail)
+        .then((publications: any) => {
+          this.publications = publications;
+        })
+
   }
 
 }

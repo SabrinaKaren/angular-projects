@@ -42,44 +42,48 @@ export class DatabaseService {
 
   getPublications(userEmail: string){
 
-    firebase
-        .database()
-        .ref(`publications/${btoa(userEmail)}`)
-        .once('value')
-        .then((snapshot: any) => {
+    return new Promise((resolve, reject) => {
 
-          let publications = [];
+      firebase
+      .database()
+      .ref(`publications/${btoa(userEmail)}`)
+      .once('value')
+      .then((snapshot: any) => {
 
-          snapshot.forEach((childSnapshot: any) => {
+        let publications = [];
 
-            let publication = childSnapshot.val();
+        snapshot.forEach((childSnapshot: any) => {
 
-            firebase
-                .storage()
-                .ref()
-                .child(`images/${childSnapshot.key}`)
-                .getDownloadURL()
-                .then((url: string) => {
+          let publication = childSnapshot.val();
 
-                  // recuperar o nome do usuário
-                  firebase
-                      .database()
-                      .ref(`user_detail/${btoa(userEmail)}`)
-                      .once('value')
-                      .then((userDetailSnapshot: any) => {
-                        publication.userName = userDetailSnapshot.val().userName;
-                      })
+          firebase
+              .storage()
+              .ref()
+              .child(`images/${childSnapshot.key}`)
+              .getDownloadURL()
+              .then((url: string) => {
 
-                  publication.imageUrl = url;
-                  publications.push(publication);
+                // recuperar o nome do usuário
+                firebase
+                    .database()
+                    .ref(`user_detail/${btoa(userEmail)}`)
+                    .once('value')
+                    .then((userDetailSnapshot: any) => {
+                      publication.userName = userDetailSnapshot.val().userName;
+                    })
 
-                })
-            
-          });
+                publication.imageUrl = url;
+                publications.push(publication);
 
-          console.log(publications);
+              })
+          
+        });
 
-        })
+        resolve(publications);
+
+      })
+
+    });
 
   }
 
