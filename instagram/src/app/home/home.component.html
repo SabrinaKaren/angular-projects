@@ -9,6 +9,6 @@
 </nav>
 <br/><br/><br/>
 <div class="container">
-    <app-publications></app-publications>
-    <app-add-publication></app-add-publication>
+    <app-publications #publications></app-publications>
+    <app-add-publication (updateTimeLine)="updateTimeLine()"></app-add-publication>
 </div>

@@ -1,7 +1,7 @@
 import { ProgressService } from './../../services/progress.service';
 import { DatabaseService } from './../../services/database.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as firebase from 'firebase';
 import { Observable, interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,6 +20,7 @@ export class AddPublicationComponent implements OnInit {
   image: any;
   publicationProgress: string = 'pendente';
   uploadPercentage: number;
+  @Output() updateTimeLine: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private databaseService: DatabaseService,
@@ -56,6 +57,7 @@ export class AddPublicationComponent implements OnInit {
 
       if (this.progressService.status === 'concluido'){
         this.publicationProgress = 'concluido';
+        this.updateTimeLine.emit();
         continueSubject.next(false);
       }
 
