@@ -40,4 +40,47 @@ export class DatabaseService {
 
   }
 
+  getPublications(userEmail: string){
+
+    firebase
+        .database()
+        .ref(`publications/${btoa(userEmail)}`)
+        .once('value')
+        .then((snapshot: any) => {
+
+          let publications = [];
+
+          snapshot.forEach((childSnapshot: any) => {
+
+            let publication = childSnapshot.val();
+
+            firebase
+                .storage()
+                .ref()
+                .child(`images/${childSnapshot.key}`)
+                .getDownloadURL()
+                .then((url: string) => {
+
+                  // recuperar o nome do usuário
+                  firebase
+                      .database()
+                      .ref(`user_detail/${btoa(userEmail)}`)
+                      .once('value')
+                      .then((userDetailSnapshot: any) => {
+                        publication.userName = userDetailSnapshot.val().userName;
+                      })
+
+                  publication.imageUrl = url;
+                  publications.push(publication);
+
+                })
+            
+          });
+
+          console.log(publications);
+
+        })
+
+  }
+
 }

@@ -1,4 +1,6 @@
+import { DatabaseService } from './../../services/database.service';
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-publications',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicationsComponent implements OnInit {
 
-  constructor() { }
+  userEmail = '';
+
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.userEmail = user.email;
+      this.updateTimeLine();
+    })
+  }
+
+  updateTimeLine(){
+    this.databaseService.getPublications(this.userEmail);
   }
 
 }
