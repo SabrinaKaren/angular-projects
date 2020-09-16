@@ -11,6 +11,8 @@ export class DatabaseService {
 
   publish(publication: any){
 
+    this.progressService.state = {bytesTransferred: 0, totalBytes: 0};
+
     firebase
         .database()
         .ref(`publications/${btoa(publication.email)}`)
@@ -43,47 +45,50 @@ export class DatabaseService {
   getPublications(userEmail: string){
 
     return new Promise((resolve, reject) => {
-
+      
       firebase
-      .database()
-      .ref(`publications/${btoa(userEmail)}`)
-      .once('value')
-      .then((snapshot: any) => {
+          .database()
+          .ref(`publications/${btoa(userEmail)}`)
+          .orderByKey()
+          .once("value")
+          .then((snapshot: any) => {
 
-        let publications = [];
+            let publications: Array<any> = [];
 
-        snapshot.forEach((childSnapshot: any) => {
+            snapshot.forEach((childSnapshot: any) => {
+              let publication = childSnapshot.val()
+              publication.key = childSnapshot.key
+              publications.push(publication)
+            })
 
-          let publication = childSnapshot.val();
+            return publications.reverse()
 
-          firebase
-              .storage()
-              .ref()
-              .child(`images/${childSnapshot.key}`)
-              .getDownloadURL()
-              .then((url: string) => {
+          })
+          .then((publications: any) => {
 
-                // recuperar o nome do usuário
-                firebase
-                    .database()
-                    .ref(`user_detail/${btoa(userEmail)}`)
-                    .once('value')
-                    .then((userDetailSnapshot: any) => {
-                      publication.userName = userDetailSnapshot.val().userName;
-                    })
+            publications.forEach((publication) => {
+              firebase
+                  .storage()
+                  .ref()
+                  .child(`images/${publication.key}`)
+                  .getDownloadURL()
+                  .then((url: string) => {
+                    publication.imageUrl = url;
+                      firebase
+                          .database()
+                          .ref(`user_detail/${btoa(userEmail)}`)
+                          .once("value")
+                          .then((snapshot: any) => {
+                            publication.userName = snapshot.val().userName;
+                            publications.push(publication);
+                          })
+                  })
+            })
 
-                publication.imageUrl = url;
-                publications.push(publication);
+            resolve(publications);
 
-              })
-          
-        });
-
-        resolve(publications);
-
-      })
-
-    });
+          })
+    })
 
   }
 
