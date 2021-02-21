@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "instagram": {
+    "charts": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/instagram",
+            "outputPath": "dist/charts",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,14 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -71,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "instagram:build"
+            "browserTarget": "charts:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "instagram:build:production"
+              "browserTarget": "charts:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "instagram:build"
+            "browserTarget": "charts:build"
           }
         },
         "test": {
@@ -119,19 +114,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "instagram:serve"
+            "devServerTarget": "charts:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "instagram:serve:production"
+              "devServerTarget": "charts:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "instagram",
+  "defaultProject": "charts",
   "cli": {
-    "analytics": "0ae1adb7-423b-4bbf-aa36-7828d451424e"
+    "analytics": "dc44db83-248e-472a-ae1c-29a0b50a51fa"
   }
 }
