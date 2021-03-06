@@ -1,5 +1,5 @@
 # Projects library in Angular
-Public repository for sharing projects developed in angular
+Public repository for sharing projects developed in angular.
 
 ## Projetos individuais
 
